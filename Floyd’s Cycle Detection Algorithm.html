@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+<script>
+		class Node_of_Linkedlist
+		{
+			constructor(data)
+			{
+				this.data_part = data;
+				this.next_part = null;
+			}
+		}
+		var head_pointer = null;
+
+		function FindLoop(head_pointer) 
+		{
+			var temp1 = head_pointer;
+			var temp2 = head_pointer;
+
+			while (temp1 != null&& temp2 != null&& temp2.next_part != null)
+			 {
+				temp1 = temp1.next_part;
+				temp2 = temp2.next_part.next_part;
+				if (temp1 == temp2)
+					return 1;
+			 }
+
+			return 0;
+		}
+		head_pointer = new Node_of_Linkedlist(50);
+		head_pointer.next_part = new Node_of_Linkedlist(10);
+		head_pointer.next_part.next_part = new Node_of_Linkedlist(40);
+		head_pointer.next_part.next_part.next_part = new Node_of_Linkedlist(20);
+		head_pointer.next_part.next_part.next_part.next_part = new Node_of_Linkedlist(30);
+
+		var temporary = head_pointer;
+		while (temporary.next_part != null)
+			temporary = temporary.next_part;
+
+		temporary.next_part = head_pointer;
+
+		if (FindLoop(head_pointer))
+			document.write("Loop exists in the Linked List" + "<br>");
+		else
+			document.write("Loop does not exists in the Linked List" + "<br>");
+	</script>
+
+</body>
+</html>
